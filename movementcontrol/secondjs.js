@@ -7,11 +7,15 @@
 var canvas = document.querySelector('#canvas2');
 var context = canvas.getContext('2d');
 var hero = {xPos: 0, yPos: 820};
-
+var ctxbeer = document.getElementById('beercanvas').getContext('2d');
+var imgbeer2 = new Image; 
+imgbeer2.src = 'beerliq2.png';
 var useUlt = 0;
 let beerlvl=0;
 let xBeer=0;
 let yBeer=225;
+let lives=3;
+let score=0;
 
 const imgone = new Image();
 imgone.src = 'unicornchar.png';
@@ -24,7 +28,10 @@ function move(e){
   ctxult = document.getElementById('ultcanvas').getContext('2d');
   imgult = new Image;
   imgult.src = 'rainbow.png';
- //alert(e.keyCode);
+  if(lives<0){
+    return;
+  }
+
 
  if(e.keyCode==39){
    if(hero.xPos ==400){
@@ -79,12 +86,23 @@ document.onkeydown = move;
 
 
 // dangerous drops // do not get hit by them //
+
 var b1 = {x: 0, y: 0};
 var b2 = {x: 0, y: 0};
 var bombs=[]; // = [b1,b2];
-for(var i=0; i<10; i++){
+let bombNumber =5;
+
+
+for(var i=0; i<bombNumber; i++){
   bombs[i] = {x: 0, y: 0, speed: Math.random()*2+1};
-}
+};
+
+// for(var q=0; q<10; q++){
+//   setInterval(3000);
+// }
+
+  
+
 
 
 function createNewBomb(bomb){
@@ -96,6 +114,9 @@ function updateBombPos(bomb, img, ctx){
   if (bomb.y >900) {
     createNewBomb(bomb);  
   }
+  if(lives<0){
+    return;
+  }
   ctx.drawImage(img, bomb.x, Math.floor(bomb.y));
 }
 function checkDeath(bomb, hero, img, ctx){
@@ -103,13 +124,29 @@ function checkDeath(bomb, hero, img, ctx){
     (bomb.y>=hero.yPos-25 && bomb.y<=hero.yPos+25) &&
     (bomb.x>=hero.xPos-25 && bomb.x<=hero.xPos+25);        
   if(xny){
-    // alert("Game Over");
+    // alert("Game Over"); // changed to lose a life //
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     console.log("dead");
     const imgdead = new Image();
     imgdead.src = 'boom.png';
     imgdead.onload = () => {
       ctx.drawImage(imgdead, hero.xPos-25, hero.yPos-8, 100 , 65);
-    };   
+    };
+    createNewBomb(bomb);
+    lives -=1;
+    
+    if(lives==2){
+      document.getElementById('life3').style.display="none";
+    }else if(lives==1){
+      document.getElementById('life2').style.display="none";
+    }else if(lives==0){
+      document.getElementById('life1').style.display="none";
+    };
+    // alert(lives);
+    if(lives<0){
+      document.getElementById('scoreAmount').value = score;
+      document.getElementById('submitForm').style.display="block";
+    }
   }
 }
 
@@ -155,7 +192,7 @@ window.addEventListener('load', createbomb('canvas3'));
 window.addEventListener('load', function () {
   
   
-  let score=0;
+  
   
   var
     img = new Image,
@@ -168,6 +205,9 @@ window.addEventListener('load', function () {
       
       return function () {
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        if(lives<0){
+          return;
+        }
         ctx.drawImage(img, x, y);
         y += 2;
         if (y >900) {
@@ -180,27 +220,18 @@ window.addEventListener('load', function () {
           y = Math.floor(Math.random()*-500), x=Math.floor(Math.random()*400);
           score++;
           // fill up beer'o-meter
-          if(beerlvl<10){
-            ctxbeer = document.getElementById('beercanvas').getContext('2d');
-            imgbeer2 = new Image;
-            imgbeer2.src = 'beerliq2.png';
+          if(beerlvl<=9 && beerlvl>=0){
             ctxbeer.drawImage(imgbeer2, xBeer, yBeer);
             beerlvl++;
             xBeer += 0;
             yBeer -= 25;
           }
-          
-          
-          
-          
-          
-          
-          
+               
           
           // beer ultimate power ready!
           if(beerlvl==10){
-            document.getElementById('fullbeer').style.display="block"
-          }
+            document.getElementById('fullbeer').style.display="block";
+          };
           document.getElementById('currentscore').value = score;
 
         }
@@ -210,9 +241,4 @@ window.addEventListener('load', function () {
 }, false);
 
 
-// ctxbeer = document.getElementById('beercanvas').getContext('2d');
-// imgbeer2 = new Image;
-// imgbeer2.src = 'beerliq2.png';
-// for(var i=0; i<10; i++){
-//   ctxbeer.drawImage(imgbeer2, 0, 225);
-// }
+

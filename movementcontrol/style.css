@@ -44,15 +44,14 @@
     top: 0;
     left: 0;
     z-index: -1;
-    border: 3px solid green;
 }
 .invis{
     opacity: 0;
 }
 .level{
     position: absolute;
-    bottom: 10px;
-    left: 0;
+    top: 906px;
+    left: 0;    
     width: 450px;
     height: 50px;
     border: 2px solid #fff;
@@ -75,6 +74,82 @@
     top: 706px;
     left: 456px;
     border: 2px solid #fff;
+}
+.float-right{
+    float: right;
+}
+.float-left{
+    float: left;
+}
+.push-up{
+    position: relative;
+    top: -22px;
+    left: 0px;
+}
+.totheright{
+    position: absolute;
+    top: 450px;
+    left: 110px;
+    display: none;
+}
+.showscore-rows{
+    border-bottom: 1px solid #777;
+}
+.showscore-div{
+    position: relative;
+    top: 500px;
+    left: 600px;
+    width: 300px;
+    height: auto;
+    /* border: 2px solid rgb(228, 163, 23); */
+    color: #fff;
+    font-family: 'Concert One', cursive;
+    font-weight: 100;
+    padding: 0px 10px 10px 10px;
+}
+.showscore-div p{
+    font-size: 20px;
+}
+.showscore-div h1{
+    margin-bottom: 18px;
+    text-align: center;
+    font-family: 'Concert One', cursive;
+    font-weight: 100;
+}
+.totheright h1{
+    font-family: 'Concert One', cursive;
+    color: #fff;
+    text-align: center;
+}
+.totheright button, .totheright input{
+    font-family: 'Concert One', cursive;
+    font-weight: 100;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+.level img{
+    position: relative;
+    left: -35px;
+    mask-repeat: repeat-x;
+    width: 35px !important;
+    height: 35px !important;
+}
+#life1{
+    position: absolute;
+    top: 6px;
+    left: 350px;
+}
+#life2{
+    position: absolute;
+    top: 6px;
+    left: 385px;
+}
+#life3{
+    position: absolute;
+    top: 6px;
+    left: 420px;
 }
 #fullbeer{
     -webkit-animation-name: ultimate;

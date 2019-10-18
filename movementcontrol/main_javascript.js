@@ -15,25 +15,21 @@ window.onload = function() {
     var scrollSpeed = 1; 
   
 
-    function loop() 
-    { 
-
+    function loop() { 
         ctx.drawImage(img, 0, imgHeight); 
-  
-
         ctx.drawImage(img, 0, imgHeight - can.height); 
   
-
         imgHeight += scrollSpeed; 
-  
-
+        if(lives<0){
+            return;
+          }
         if (imgHeight == can.height) 
             imgHeight = 0; 
-
-        window.requestAnimationFrame(loop); 
-    } 
-  
-
-    loop(); 
+            window.requestAnimationFrame(loop); 
+    }        
+      
+    loop();
+       
+     
   
 } 
