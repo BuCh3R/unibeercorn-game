@@ -16,10 +16,10 @@ window.onload = function() {
 </script> -->
     
 </head> 
-<body style="background-color: black;"> 
+<body onload="backgroundLoadImg()" style="background-color: black;"> 
     <div>
     
-    <canvas id="canvas1" style="border: 1px solid black;"></canvas>
+    <canvas id="canvas1" height="900px" width="450px" style="border: 1px solid black;"></canvas>
     <canvas id="canvas2" height="900px" width="450px"></canvas>
     <canvas id="canvas3" height="900px" width="450px"></canvas>
     <!-- <canvas id="canvas4" height="900px" width="450px"></canvas> -->
@@ -43,14 +43,27 @@ window.onload = function() {
 <div id="fullbeer">
 
 </div>
-<form id="submitForm" class="totheright" action="includes/highscore.inc.php" method="POST">
-    <h1>Game Over</h1>
-    <input type="text" name="username">
-    <input id="scoreAmount" type="hidden" name="score" value="">
-    <button type="submit" name="hsSub">submit score</button>
-</form>
+<div class="wrapperBegin">
+    <div class="beginGame">
+        <button id="gameStartButton" onclick="onclickBegin(); disappear();">Begin Game</button>
+    </div>
+    <form id="submitForm" class="totheright" action="includes/highscore.inc.php" method="POST">
+        <h1>Game Over</h1>
+        <input type="text" name="username" placeholder="Name">
+        <input id="scoreAmount" type="hidden" name="score" value="">
+        <button type="submit" name="hsSub">submit score</button>
+    </form>
+    <div class="replayWrap">
+        <form action="randomtry.php">
+            <button id="replayId" class="totheright2">Replay</button>
+        </form>
+    </div>
+</div>
+
+
 
 <?php
+
 //get the highscores from the database
 getHighscore($conn);
 function getHighscore($conn){
@@ -69,6 +82,8 @@ function getHighscore($conn){
         echo "</p></div>";
     }
 }
+    
+
 
 ?>
 

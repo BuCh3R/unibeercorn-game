@@ -1,4 +1,13 @@
-window.onload = function() { 
+function backgroundLoadImg(){
+    var backgroundIMG = new Image();
+    backgroundIMG.src = "starspurple.png";
+    backgroundIMG.onload = () => {
+        document.getElementById('canvas1').getContext('2d').drawImage(backgroundIMG, 0, 0);
+        document.getElementById('canvas1').getContext('2d').drawImage(backgroundIMG, 0, 0);
+    }
+}
+
+function backgroundScroll() { 
     var can = document.getElementById('canvas1'); 
     var ctx = can.getContext('2d'); 
     

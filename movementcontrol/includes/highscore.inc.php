@@ -8,7 +8,10 @@ if(isset($_POST['hsSub'])){
 
     $sql = "INSERT INTO highscore (highScoreVAL, userName) VALUES (?, ?)";
     $stmt = mysqli_stmt_init($conn);
-    if(!mysqli_stmt_prepare($stmt, $sql)) {
+    if(empty($userName)){
+        $userName = "<p>&nbsp;</p>";
+        header("Location: ../randomtry.php?empty_field");
+    }if(!mysqli_stmt_prepare($stmt, $sql)) {
         header("Location: ../randomtry.php?server=error"); 
     }else{
         mysqli_stmt_bind_param($stmt, "ss", $highscore, $userName);
